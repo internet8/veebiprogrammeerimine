@@ -2,9 +2,9 @@
 	//echo "Siin on minu esimene PHP!";
 	$name = "Kent";
 	$surname = "Pirma";
-	$todayDate = date("d.m.Y");
 	$weekDayNow = date("N");
 	$weekdayNamesET = ["esmaspäev", "teisipäev", "kolmapäev", "neljapäev", "reede", "laupäev", "pühapäev"];
+	$monthNamesET = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni", "juuli", "august", "september", "oktoober", "november", "detsember"];
 	//var_dump($weekdayNamesET);
 	//echo $weekdayNamesET[0];
 	$hourNow = date("H");
@@ -50,7 +50,7 @@
 	<p>See leht on valminud <a href="http://www.tlu.ee" target="_blank">TLÜ</a> õppetöö raames valminud veebilehed. Need ei oma mingit sügavat sisu ja nende kopeerimine ei oma mõtet.</p>
 	<p>Lisan veel ühe p tag-i järgmise tunni jaoks.</p>
 	<?php
-		echo "<p>Täna on " .$weekdayNamesET[$weekDayNow-1] .", " .$todayDate ."</p> \n";
+		echo "<p>Täna on " .$weekdayNamesET[$weekDayNow-1] .", " .date("d") .". " .$monthNamesET[date("n")-1] ." " .date("Y") ."</p> \n";
 		echo "<p>Lehe avamise hetkel oli kell " .date("H:i:s") .", käes on " .$partOfDay .".</p> \n";
 	?>
 	<!--<img src="http://greeny.cs.tlu.ee/~rinde/veebiprogrammeerimine2018s/tlu_terra_600x400_1.jpg" alt="TLÜ Terra õppehoone">-->

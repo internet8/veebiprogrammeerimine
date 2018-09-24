@@ -2,6 +2,7 @@
 	//echo "Siin on minu esimene PHP!";
 	$name = "Tundmatu";
 	$surname = "inimene";	
+	$monthNamesET = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni", "juuli", "august", "september", "oktoober", "november", "detsember"];
 	//var_dump($_POST);
 	if (isset($_POST["firstName"])) {
 		$name = $_POST["firstName"];
@@ -37,8 +38,21 @@
 		<input name="firstName" type="text" value="">
 		<label>Perekonnanimi:</label>
 		<input name="surName" type="text" value="">
-		<label>
+		<label>Sünniaasta</label>
 		<input name="birthYear", type="number", min="1914" max="2003" value="1998">
+		<label>Sünnikuu</label>
+		<select name="birthMonth">
+			<?php
+				for ($i = 1; $i <= 12; $i++) {
+					if ($i == date("n")) {
+						echo '<option value="' .$i .'" selected>' .$monthNamesET[$i-1] .'</option>';
+					} 
+					else {
+						echo '<option value="' .$i .'">' .$monthNamesET[$i-1] .'</option>';
+					}
+				}
+			?>
+		</select>
 		<br>
 		<input name="submitUserData" type="submit" value="Saada andmed">
 	</form>
@@ -49,6 +63,13 @@
 			echo "<ul> \n";
 			for ($i = $_POST["birthYear"]; $i <= date("Y"); $i++) {
 				echo "<li>" .$i ."</li> \n";
+			}
+			echo "</ul> \n";
+			
+			echo "<br><p>Ning käesoleval aastal järgmised kuud kuni sünnikuuni: </p>";
+			echo "<ul> \n";
+			for ($i = 1; $i <= $_POST["birthMonth"]; $i++) {
+				echo "<li>" .$monthNamesET[$i-1] ."</li> \n";
 			}
 			echo "</ul> \n";
 		}
