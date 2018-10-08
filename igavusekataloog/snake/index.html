@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Snake</title>
+</head>
+<body>
+	<h1>SNAKE!</h1>
+	<p id="scoreHTML">Score: </p>
+	<canvas id="snakeCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+	<br>
+	<button onclick="startGame();">START!</button>
+	<script>
+		var box = document.getElementById("snakeCanvas");
+		var ctx = box.getContext("2d");
+		ctx.rect(0, 0, 10, 10);
+		ctx.stroke();
+		var currentPosX = 0;
+		var currentPosY = 0;
+		var foodPosX = 0;
+		var foodPosY = 0;
+		var direction = "right";
+		var gameOver = true;
+		var score = 0;
+		var snakeParts = [];
+		var snakeLength = 1;
+		var interval = setInterval( function() { moveSnake(currentPosX, currentPosY, direction); }, 40);
+		
+		function startGame () {
+			if (gameOver) {
+				score = 0;
+				displayScore();
+				currentPosX = 0;
+				currentPosY = 0;
+				foodPosX = genFood();
+				foodPosY = genFood();
+				direction = "right";
+				snakeParts = [];
+				snakeParts.push(new coordinate(currentPosX, currentPosY));
+				snakeLength = 1;
+				gameOver = false;
+			}			
+		}
+
+		document.onkeydown = function(event) {
+			switch (event.keyCode) {
+			   case 37:
+					if (direction != "right") direction = "left";
+				  break;
+			   case 38:
+					if (direction != "down") direction = "up";
+				  break;
+			   case 39:
+					if (direction != "left") direction = "right";
+				  break;
+			   case 40:
+					if (direction != "up") direction = "down";
+				  break;
+			}
+		};
+		
+		function moveSnake (curPosX, curPosY, dir) {
+			if (gameOver) {
+				return;
+			}
+			if (dir == "up") {
+				currentPosY -= 10;
+			} else if (dir == "down") {
+				currentPosY += 10;
+			} else if (dir == "right") {
+				currentPosX += 10;
+			} else if (dir == "left") {
+				currentPosX -= 10;
+			}
+			if (currentPosY == foodPosY && currentPosX == foodPosX) {
+				score++;
+				displayScore();
+				foodPosX = genFood();
+				foodPosY = genFood();
+				snakeLength++;
+				snakeParts.push(new coordinate(0, 0));
+			}
+			
+			for (var i = 0; i < snakeParts.length; i++) {
+				if (snakeParts[i].x == currentPosX && snakeParts[i].y == currentPosY) {
+					gameOver = true;
+					return;
+				}
+			}
+			
+			if (currentPosY > 490 || currentPosX > 490 || currentPosY < 0 || currentPosX < 0) {
+				gameOver = true;
+				return;
+			}
+			
+			ctx.clearRect(0, 0, 500, 500);
+			ctx.beginPath();
+			if (snakeLength >= 2) {
+				for (var i = snakeParts.length-1; i > 0; i--) {
+					ctx.rect(snakeParts[i].x = snakeParts[i-1].x, snakeParts[i].y = snakeParts[i-1].y, 10, 10);
+					ctx.stroke();
+				}
+			}			
+			ctx.rect(snakeParts[0].x = currentPosX, snakeParts[0].y = currentPosY, 10, 10);
+			ctx.stroke();
+			ctx.fillRect(foodPosX, foodPosY, 10, 10);
+			ctx.stroke();
+		}
+		
+		function genFood() {
+			var result = Math.ceil(Math.floor((Math.random() * 490) + 1) / 10) * 10;
+			while (snakeParts.includes(result)) {
+				result = Math.ceil(Math.floor((Math.random() * 490) + 1) / 10) * 10;
+			}
+			return result;
+		}
+		
+		function displayScore() {
+			document.getElementById("scoreHTML").innerHTML = "Score: " + String(score);
+		}
+		
+		function coordinate(x, y) {
+			this.x = x;
+			this.y = y;
+		}
+	</script>
+</body>
+</html>

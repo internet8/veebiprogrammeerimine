@@ -1,0 +1,118 @@
+<!DOCTYPE hyml>
+<html>
+<head>
+
+<title>Combined Events Calculator</title>
+<script src="calculations.js"></script>
+<link type="text/CSS" rel="stylesheet" href="stylesheet.css">
+<h1 style="font-size: 1em; font-family: Arial; text-align: center;">Combined Events Calculator</h1>
+</head>
+<body>
+
+<form>
+
+	<table id="calcTable">
+		<thead>
+			<th colspan="4"; style="font-family: Arial";>
+				<!-- <select name="event">
+				<option value="dec" selected>DECATHLON MEN</option>
+				<option value="hep">HEPTATHLON WOMEN</option>
+				</select> -->
+				DECATHLON
+			</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td><strong>Event</strong></td>
+				<td><strong>Result</strong></td>
+				<td><strong></strong></td>
+				<td><strong>Points</strong></td>
+			</tr>
+			<tr>
+				<td><strong>Day 1</strong></td>
+			</tr>
+			<tr>
+				<td>100m:<br></td>
+				<td><input type="number" name="100m"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event1(document.getElementsByName('100m')[0].value)" /></td>
+				<td id="100mResult"></td>
+			</tr>
+			<tr>
+				<td>Long Jump:<br></td>
+				<td><input type="number" name="LongJump"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event2(document.getElementsByName('LongJump')[0].value)" /></td>
+				<td id="LGResult"></td>
+			</tr>
+			<tr>
+				<td>Shot Put:<br></td>
+				<td><input type="number" name="ShotPut"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event3(document.getElementsByName('ShotPut')[0].value)" /></td>
+				<td id="SPResult"></td>
+			</tr>
+			<tr>
+				<td>High Jump:<br></td>
+				<td><input type="number" name="HighJump"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event4(document.getElementsByName('HighJump')[0].value)" /></td>
+				<td id="HJResult"></td>
+			</tr>
+			<tr>
+				<td>400m(seconds):<br></td>
+				<td><input type="number" name="400m"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event5(document.getElementsByName('400m')[0].value)" /></td>
+				<td id="400mResult"></td>
+			</tr>
+			<tr>
+				<td><strong>Day 2</strong></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>110mh:<br></td>
+				<td><input type="number" name="110mh"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event6(document.getElementsByName('110mh')[0].value)" /></td>
+				<td id="110mhResult"></td>
+			</tr>
+			<tr>
+				<td>Discus Throw:<br></td>
+				<td><input type="number" name="DiscusThrow"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event7(document.getElementsByName('DiscusThrow')[0].value)" /></td>
+				<td id="DTResult"></td>
+			</tr>
+			<tr>
+				<td>Pole Vault:<br></td>
+				<td><input type="number" name="PoleVault"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event8(document.getElementsByName('PoleVault')[0].value)" /></td>
+				<td id="PVResult"></td>
+			</tr>
+			<tr>
+				<td>Javelin Throw:<br></td>
+				<td><input type="number" name="JavelinThrow"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event9(document.getElementsByName('JavelinThrow')[0].value)" /></td>
+				<td id="JVResult"></td>
+			</tr>
+			<tr>
+				<td>1500m(minutes):<br></td>
+				<td><input type="number" width="1" name="1500m"/></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>1500m(seconds):<br></td>
+				<td><input type="number" width="1" name="1500m"/></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="M_event10(document.getElementsByName('1500m')[0].value, document.getElementsByName('1500m')[1].value)" /></td>
+				<td id="1500mResult"></td>
+			</tr>
+			<tr>
+				<td><strong>Sum<br></strong></td>
+				<td></td>
+				<td><input type="button" class="button" value="Calculate" name="button" onclick="Sum()" /></td>
+				<td id="FinalResult"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</form>
+
+</body>
+</html>
