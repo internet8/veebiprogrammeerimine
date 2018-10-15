@@ -1,6 +1,5 @@
 <?php
   require("functions.php");
-  //kui pole sisse loginud
   
   // kui pole sisse logitud
   if (!isset($_SESSION["userId"])) {
@@ -17,6 +16,12 @@
   
   if (isset($_GET["id"])) {
 	  $msg = readmsgforvalidation($_GET["id"]);
+  }
+  
+  if (isset($_POST["submitValidation"])) {
+	  $msg = readmsgforvalidation($_POST["id"]);
+	  echo validatemsg($_POST["id"], $_POST["validation"], $_SESSION["userId"]);
+	  header("Location: validatemsg.php");
   }
 ?>
 <!DOCTYPE html>

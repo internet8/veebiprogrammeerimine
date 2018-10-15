@@ -8,6 +8,53 @@
 	//alustan sessiooni
 	session_start();
 	
+	function getAllUsers ($userId) {
+		$notice = "<ul> \n";
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("SELECT firstname, lastname, email FROM vpusers WHERE id != ?");
+		$stmt->bind_param("i", $userId);
+		$stmt->bind_result($firstName, $lastName, $eMail);
+		$stmt->execute();
+		while($stmt->fetch()){
+			$notice .= "<li>" .$firstName ." " .$lastName .": " .$eMail .'<br>' ."</li> \n";
+		}
+		$stmt->close();
+		$mysqli->close();
+		return $notice;
+	}
+	
+	function allvalidmessages () {
+		$notice = "<ul> \n";
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("SELECT message FROM vpamsg WHERE valid=1 ORDER BY validated DESC");
+		echo $mysqli->error;
+		$stmt->bind_result($msg);
+		$stmt->execute();
+		
+		while($stmt->fetch()){
+			$notice .= "<li>" .$msg .'<br>' ."</li> \n";
+		}
+		$stmt->close();
+		$mysqli->close();
+		return $notice;
+	}
+	
+	function validatemsg ($messageId, $allowed, $userId) {
+		$notice = "";
+		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("UPDATE vpamsg SET validator=?, valid=?, validated=now() WHERE id=?");
+		echo $mysqli->error;
+		$stmt->bind_param("iii", $userId, $allowed, $messageId);// s - string, i - integer, d - decimal
+		if ($stmt->execute()) {
+			$notice = 'Sõnum on valideeritud.';
+		} else {
+			$notice = "Sõnumi valideerimisel tekkis tõrge: " .$stmt->error;
+		}
+		$stmt->close();
+		$mysqli->close();
+		return $notice;
+	}
+	
 	function readmsgforvalidation($editId){
 		$notice = "";
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);

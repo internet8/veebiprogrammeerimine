@@ -1,6 +1,5 @@
 <?php
   require("functions.php");
-  //kui pole sisse loginud
   
   // kui pole sisse logitud
   if (!isset($_SESSION["userId"])) {
@@ -20,17 +19,13 @@
 <html>
   <head>
     <meta charset="utf-8">
-	<title>Pealeht</title>
+	<title>Kasutajad</title>
   </head>
   <body>
-    <h1>Pealeht</h1>
+    <h1>KAsutajad</h1>
 	<p>See leht on valminud <a href="http://www.tlu.ee" target="_blank">TLÜ</a> õppetöö raames ja ei oma mingisugust, mõtestatud või muul moel väärtuslikku sisu.</p>
 	<hr>
-	<p>Olete sisse loginud nimega: <?php echo $_SESSION["userFirstName"] ." " .$_SESSION["userLastName"]; ?>. <b><a href="?logout=1">Logi välja!</a></b></p>
-	<ul>
-		<li>Valideeri ananüümseid <a href="validatemsg.php">sõnumeid</a></li>
-	</ul>
-	<p>Vaadake kõiki <a href="users.php">kasutajaid</a>.</p>
+	<p><?php echo getAllUsers($_SESSION["userId"]); ?></p>
 	
   </body>
 </html>

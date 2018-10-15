@@ -48,7 +48,8 @@
 	<p><a href="addmsg.php">Lisa sõnum</a>!</p>
 	<hr>
 	<div>
-	  <?php //echo allvalidmessages(); ?>
+	  <h2>Valideeritud sõnumid</h2>
+	  <?php echo allvalidmessages(); ?>
 	</div>
 	
   </body>
