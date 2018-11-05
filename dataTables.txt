@@ -1,1 +1,3 @@
 CREATE TABLE `if18_kent_pi_1`.`vpamsg` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `message` VARCHAR(256) NOT NULL , `validator` INT(11) NULL , `valid` INT(1) NULL , `validated` TIMESTAMP NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `if18_kent_pi_1`.`vpphotos` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `userID` INT(11) NOT NULL , `filename` VARCHAR(40) NOT NULL , `created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , `privacy` INT(1) NOT NULL , `deleted` TIMESTAMP NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
